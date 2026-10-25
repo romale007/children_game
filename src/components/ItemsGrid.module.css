@@ -1,0 +1,40 @@
+.grid {
+  display: grid;
+  gap: clamp(6px, 1.5vw, 16px);
+  width: 100%;
+  max-width: 900px;
+}
+
+.item {
+  position: relative;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.55);
+  padding: 8%;
+}
+
+.image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+}
+
+.mark {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: clamp(28px, 4.5vw, 44px);
+  height: clamp(28px, 4.5vw, 44px);
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--leaf);
+  color: #fff;
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  font-weight: 900;
+  box-shadow: 0 3px 0 var(--leaf-dark);
+}

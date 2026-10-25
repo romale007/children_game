@@ -1,0 +1,29 @@
+.wrap {
+  position: relative;
+}
+
+.toggle {
+  min-height: 44px;
+  padding: 0 16px;
+  border-radius: 999px;
+  border: 2px dashed var(--ink-soft);
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+  font-weight: 600;
+  background: rgba(255, 250, 242, 0.7);
+}
+
+.card {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  width: min(340px, calc(100vw - 32px));
+  padding: 16px 18px;
+  border-radius: 18px;
+  background: var(--card);
+  box-shadow: 0 10px 30px rgba(90, 50, 20, 0.2);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.4;
+  z-index: 10;
+}

@@ -1,0 +1,41 @@
+.finish {
+  justify-content: center;
+  gap: clamp(8px, 2.5vh, 28px);
+  text-align: center;
+}
+
+.corner {
+  position: absolute;
+  top: max(16px, env(safe-area-inset-top));
+  right: max(16px, env(safe-area-inset-right));
+  z-index: 3;
+}
+
+.title {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  font-size: clamp(3.2rem, 11vw, 7rem);
+  font-weight: 900;
+  color: var(--accent);
+  text-shadow: 0 6px 0 rgba(178, 59, 25, 0.25);
+}
+
+.subtitle {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  font-size: clamp(1.4rem, 4vw, 2.4rem);
+}
+
+.friends {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  gap: clamp(24px, 8vw, 80px);
+}
+
+.friend {
+  width: clamp(110px, 22vw, 240px);
+  height: auto;
+}

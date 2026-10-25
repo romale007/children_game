@@ -1,0 +1,145 @@
+.top {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  max-width: 1100px;
+}
+
+.title {
+  flex: 1;
+  text-align: center;
+}
+
+.badge {
+  display: inline-block;
+  padding: 4px 16px;
+  border-radius: 999px;
+  background: var(--sun);
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+}
+
+.question {
+  margin: 6px 0 0;
+  font-size: clamp(1.4rem, 4vw, 2.6rem);
+  font-weight: 900;
+  line-height: 1.1;
+}
+
+.hintRow {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  margin-top: 8px;
+}
+
+.hint {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: clamp(1rem, 2.4vw, 1.3rem);
+  text-align: center;
+}
+
+.stage {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(8px, 3vw, 32px);
+  width: 100%;
+  max-width: 1100px;
+}
+
+.character {
+  width: clamp(80px, 16vw, 200px);
+  height: auto;
+  flex-shrink: 0;
+}
+
+.card {
+  flex: 1;
+  max-width: 820px;
+  padding: clamp(12px, 2.5vw, 28px);
+  border-radius: var(--radius);
+  background: var(--card);
+  box-shadow: var(--shadow);
+}
+
+.answers {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  gap: clamp(16px, 5vw, 48px);
+  padding: 8px 0;
+}
+
+.answer {
+  width: clamp(84px, 14vw, 130px);
+  height: clamp(84px, 14vw, 130px);
+  border-radius: 50%;
+  background: var(--sun);
+  font-size: clamp(2.4rem, 6vw, 4rem);
+  font-weight: 900;
+  box-shadow: 0 8px 0 #d9a520;
+  transition: background-color 0.2s, box-shadow 0.1s, transform 0.1s;
+}
+
+.answer:active:not(:disabled) {
+  translate: 0 6px;
+  box-shadow: 0 2px 0 #d9a520;
+}
+
+.answer:disabled {
+  cursor: default;
+}
+
+.wrong {
+  background: #f3b9a6;
+  box-shadow: 0 8px 0 #c97b62;
+}
+
+.right {
+  background: var(--leaf);
+  color: #fff;
+  box-shadow: 0 8px 0 var(--leaf-dark);
+}
+
+.praise {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  translate: -50% -50%;
+  z-index: 5;
+  padding: 16px 40px;
+  border-radius: var(--radius);
+  background: var(--leaf);
+  color: #fff;
+  font-size: clamp(2.4rem, 8vw, 5rem);
+  font-weight: 900;
+  box-shadow: 0 10px 0 var(--leaf-dark);
+  pointer-events: none;
+}
+
+@media (max-width: 600px) {
+  .stage {
+    flex-direction: column;
+  }
+
+  .character {
+    width: 80px;
+  }
+
+  .card {
+    flex: none;
+    width: 100%;
+  }
+}

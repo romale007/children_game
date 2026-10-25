@@ -1,0 +1,19 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-width: 64px;
+  height: 64px;
+  padding: 0 14px;
+  border-radius: 20px;
+  background: var(--card);
+  box-shadow: var(--shadow);
+  font-size: 1.8rem;
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.button:active {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 rgba(90, 50, 20, 0.25);
+}

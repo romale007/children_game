@@ -1,0 +1,88 @@
+:root {
+  --bg-top: #fff4e0;
+  --bg-bottom: #ffd9a8;
+  --ink: #5a3214;
+  --ink-soft: #8a5a32;
+  --accent: #e2552d;
+  --accent-dark: #b23b19;
+  --sun: #ffd166;
+  --leaf: #8fbf4d;
+  --leaf-dark: #5f8f2a;
+  --card: #fffaf2;
+  --shadow: 0 6px 0 rgba(90, 50, 20, 0.25);
+  --radius: 28px;
+
+  font-family: 'Nunito', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  font-weight: 800;
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-bottom) 100%);
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  padding: 0;
+}
+
+button:focus-visible {
+  outline: 4px solid var(--leaf-dark);
+  outline-offset: 4px;
+}
+
+img {
+  -webkit-user-drag: none;
+}
+
+.screen {
+  position: relative;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: max(16px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right))
+    max(16px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+}
+
+.big-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4em;
+  min-height: 80px;
+  padding: 0 1.4em;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 900;
+  box-shadow: 0 8px 0 var(--accent-dark);
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.big-button:active {
+  transform: translateY(6px);
+  box-shadow: 0 2px 0 var(--accent-dark);
+}
