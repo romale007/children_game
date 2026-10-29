@@ -1,18 +1,23 @@
 import { motion } from 'motion/react'
 import { useEffect } from 'react'
+import HubLink from '../../../shared/components/HubLink'
+import ParentHint from '../../../shared/components/ParentHint'
+import { img } from '../assets'
 import FallingLeaves from '../components/FallingLeaves'
-import ParentHint from '../components/ParentHint'
-import { preloadAudio } from '../game/audio'
-import { img, levels, startNote } from '../levels'
+import { levels, startNote } from '../levels'
+import { preloadVoice } from '../voice'
 import styles from './StartScreen.module.css'
 
 export default function StartScreen({ onPlay }: { onPlay: () => void }) {
   // Fetch the voice-over while the child is still on the start screen.
-  useEffect(preloadAudio, [])
+  useEffect(preloadVoice, [])
 
   return (
     <div className={`screen ${styles.start}`}>
       <FallingLeaves />
+      <div className={styles.back}>
+        <HubLink />
+      </div>
       <div className={styles.corner}>
         <ParentHint note={startNote} />
       </div>
@@ -29,7 +34,7 @@ export default function StartScreen({ onPlay }: { onPlay: () => void }) {
 
       <div className={styles.scene}>
         <motion.img
-          src={img('hedgehog.png')}
+          src={img('hedgehog.webp')}
           alt="Ёжик"
           className={styles.hero}
           animate={{ rotate: [0, -4, 4, 0] }}
@@ -48,7 +53,7 @@ export default function StartScreen({ onPlay }: { onPlay: () => void }) {
           ))}
         </div>
         <motion.img
-          src={img('squirrel.png')}
+          src={img('squirrel.webp')}
           alt="Белочка"
           className={styles.hero}
           animate={{ rotate: [0, 4, -4, 0] }}

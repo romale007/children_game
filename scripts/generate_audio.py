@@ -1,9 +1,10 @@
-"""Generate voice-over mp3 files for every phrase in src/game/phrases.json.
+"""Generate voice-over mp3 files for a game: src/games/<game>/phrases.json → public/games/<game>/audio/.
 
 Usage:
     python3 -m venv .venv && .venv/bin/pip install edge-tts
-    .venv/bin/python scripts/generate_audio.py            # only missing files
-    .venv/bin/python scripts/generate_audio.py --force    # regenerate everything
+    .venv/bin/python scripts/generate_audio.py autumn-count            # only missing files
+    .venv/bin/python scripts/generate_audio.py autumn-count --force    # regenerate everything
+    .venv/bin/python scripts/generate_audio.py autumn-count right      # only the given phrases
 """
 
 import argparse
@@ -14,8 +15,6 @@ from pathlib import Path
 import edge_tts
 
 ROOT = Path(__file__).resolve().parent.parent
-PHRASES = ROOT / "src" / "game" / "phrases.json"
-OUT_DIR = ROOT / "public" / "audio"
 
 # edge-tts returns CBR 48 kbit/s mono mp3 at 24 kHz: every frame is 144 bytes and 24 ms long.
 FRAME_BYTES = 144
@@ -45,6 +44,7 @@ async def synthesize(text: str, voice: str, rate: str, pitch: str) -> bytes:
 
 async def main() -> None:
     parser = argparse.ArgumentParser()
+    parser.add_argument("game", help="game id, a folder name in src/games")
     parser.add_argument("--voice", default="ru-RU-SvetlanaNeural")
     parser.add_argument("--rate", default="-10%", help="slower speech is easier for kids")
     parser.add_argument("--pitch", default="+0Hz")
@@ -52,13 +52,15 @@ async def main() -> None:
     parser.add_argument("ids", nargs="*", help="phrase ids to generate (default: all)")
     args = parser.parse_args()
 
-    phrases: dict[str, str] = json.loads(PHRASES.read_text(encoding="utf-8"))
-    OUT_DIR.mkdir(parents=True, exist_ok=True)
+    phrases_file = ROOT / "src" / "games" / args.game / "phrases.json"
+    out_dir = ROOT / "public" / "games" / args.game / "audio"
+    phrases: dict[str, str] = json.loads(phrases_file.read_text(encoding="utf-8"))
+    out_dir.mkdir(parents=True, exist_ok=True)
 
     for phrase_id, text in phrases.items():
         if args.ids and phrase_id not in args.ids:
             continue
-        target = OUT_DIR / f"{phrase_id}.mp3"
+        target = out_dir / f"{phrase_id}.mp3"
         if target.exists() and not args.force and not args.ids:
             continue
         target.write_bytes(await synthesize(text, args.voice, args.rate, args.pitch))

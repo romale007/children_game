@@ -11,6 +11,13 @@
   z-index: 3;
 }
 
+.back {
+  position: absolute;
+  top: max(16px, env(safe-area-inset-top));
+  left: max(16px, env(safe-area-inset-left));
+  z-index: 3;
+}
+
 .title {
   position: relative;
   z-index: 1;

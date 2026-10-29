@@ -1,10 +1,12 @@
 import { motion } from 'motion/react'
 import { useEffect } from 'react'
+import HubLink from '../../../shared/components/HubLink'
+import ParentHint from '../../../shared/components/ParentHint'
+import { celebrate } from '../../../shared/confetti'
+import { img } from '../assets'
 import FallingLeaves from '../components/FallingLeaves'
-import ParentHint from '../components/ParentHint'
-import { celebrate } from '../game/confetti'
-import { say } from '../game/audio'
-import { finishNote, img } from '../levels'
+import { finishNote } from '../levels'
+import { say } from '../voice'
 import styles from './FinishScreen.module.css'
 
 export default function FinishScreen({ onRestart }: { onRestart: () => void }) {
@@ -16,6 +18,9 @@ export default function FinishScreen({ onRestart }: { onRestart: () => void }) {
   return (
     <div className={`screen ${styles.finish}`}>
       <FallingLeaves />
+      <div className={styles.back}>
+        <HubLink />
+      </div>
       <div className={styles.corner}>
         <ParentHint note={finishNote} />
       </div>
@@ -31,7 +36,7 @@ export default function FinishScreen({ onRestart }: { onRestart: () => void }) {
       <p className={styles.subtitle}>Ты сосчитал до 10!</p>
 
       <div className={styles.friends}>
-        {['hedgehog.png', 'squirrel.png'].map((name, i) => (
+        {['hedgehog.webp', 'squirrel.webp'].map((name, i) => (
           <motion.img
             key={name}
             src={img(name)}

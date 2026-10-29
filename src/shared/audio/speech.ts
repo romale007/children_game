@@ -14,13 +14,14 @@ export function stopSpeech() {
   if (typeof speechSynthesis !== 'undefined') speechSynthesis.cancel()
 }
 
-export function speak(text: string) {
-  if (typeof speechSynthesis === 'undefined') return
+export function speak(text: string, onEnd?: () => void) {
+  if (typeof speechSynthesis === 'undefined') return onEnd?.()
   stopSpeech()
   const utterance = new SpeechSynthesisUtterance(text)
   utterance.lang = 'ru-RU'
   utterance.rate = 0.9
   utterance.pitch = 1.1
   if (voice) utterance.voice = voice
+  if (onEnd) utterance.onend = onEnd
   speechSynthesis.speak(utterance)
 }

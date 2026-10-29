@@ -1,12 +1,12 @@
 import { AnimatePresence, motion } from 'motion/react'
 import { useEffect, useState } from 'react'
+import IconButton from '../../../shared/components/IconButton'
+import ParentHint from '../../../shared/components/ParentHint'
+import { burst } from '../../../shared/confetti'
 import FallingLeaves from '../components/FallingLeaves'
-import IconButton from '../components/IconButton'
 import ItemsGrid from '../components/ItemsGrid'
-import ParentHint from '../components/ParentHint'
-import { burst } from '../game/confetti'
-import { countPhrase, say } from '../game/audio'
 import type { Level } from '../levels'
+import { countPhrase, say } from '../voice'
 import styles from './TaskScreen.module.css'
 
 type Props = {

@@ -1,6 +1,5 @@
-import type { PhraseId } from './game/audio'
-
-export const img = (name: string) => `${import.meta.env.BASE_URL}images/${name}`
+import { img } from './assets'
+import type { PhraseId } from './voice'
 
 export type Level = {
   question: string
@@ -17,9 +16,9 @@ export const levels: Level[] = [
   {
     question: 'Сколько яблок у ёжика?',
     questionAudio: 'q-apples',
-    itemImage: img('apple.jpg'),
+    itemImage: img('apple.webp'),
     itemName: 'яблоко',
-    character: img('hedgehog.png'),
+    character: img('hedgehog.webp'),
     count: 5,
     options: [4, 5, 6],
     parentNote:
@@ -28,9 +27,9 @@ export const levels: Level[] = [
   {
     question: 'Сколько грибочков у белочки?',
     questionAudio: 'q-mushrooms',
-    itemImage: img('mushroom.png'),
+    itemImage: img('mushroom.webp'),
     itemName: 'грибок',
-    character: img('squirrel.png'),
+    character: img('squirrel.webp'),
     count: 7,
     options: [6, 7, 8],
     parentNote: 'Цель: счёт до 7. Считаем грибы вслух, обводим пальцем каждый. Верный ответ «7».',
@@ -38,7 +37,7 @@ export const levels: Level[] = [
   {
     question: 'Сколько листиков упало?',
     questionAudio: 'q-leaves',
-    itemImage: img('leaf.png'),
+    itemImage: img('leaf.webp'),
     itemName: 'листик',
     count: 9,
     options: [8, 9, 10],
@@ -47,9 +46,9 @@ export const levels: Level[] = [
   {
     question: 'Сколько шишек собрал ёжик?',
     questionAudio: 'q-cones',
-    itemImage: img('cone.png'),
+    itemImage: img('cone.webp'),
     itemName: 'шишка',
-    character: img('hedgehog.png'),
+    character: img('hedgehog.webp'),
     count: 10,
     options: [8, 9, 10],
     parentNote:
@@ -63,4 +62,4 @@ export const startNote =
 export const finishNote =
   'Похвалите ребёнка, пересчитайте вместе до 10. Спросите: «Что было самым интересным? Какое задание было трудным?»'
 
-export const decoLeaves = [img('deco-leaf-1.png'), img('deco-leaf-2.png'), img('deco-leaf-3.png')]
+export const decoLeaves = [img('deco-leaf-1.webp'), img('deco-leaf-2.webp'), img('deco-leaf-3.webp')]

@@ -1,13 +1,16 @@
 import { AnimatePresence, motion } from 'motion/react'
-import { useCallback, useReducer } from 'react'
-import { initialState, reducer } from './game/reducer'
+import { useCallback, useEffect, useReducer } from 'react'
+import { stopAudio } from '../../shared/audio/voice'
+import { initialState, reducer } from './reducer'
 import { levels } from './levels'
 import FinishScreen from './screens/FinishScreen'
 import StartScreen from './screens/StartScreen'
 import TaskScreen from './screens/TaskScreen'
 
-export default function App() {
+export default function Game() {
   const [state, dispatch] = useReducer(reducer, initialState)
+  // Don't keep talking after the player leaves the game.
+  useEffect(() => stopAudio, [])
   // Stable so TaskScreen's auto-advance timer isn't reset by re-renders.
   const next = useCallback(() => dispatch({ type: 'NEXT', total: levels.length }), [])
   const key = state.screen === 'task' ? `task-${state.index}` : state.screen
