@@ -1,0 +1,18 @@
+/* A calm palette: few colours compete with the figures. */
+.theme {
+  --bg-top: #f3f8ff;
+  --bg-bottom: #d9e7fb;
+  --ink: #2c3e66;
+  --ink-soft: #5a6f99;
+  --accent: #f08a24;
+  --accent-dark: #c2650c;
+  --leaf-dark: #3d6bc4;
+  --card: #ffffff;
+  --option: #f1f5fc;
+  --shadow: 0 6px 0 rgba(44, 62, 102, 0.15);
+
+  height: 100dvh;
+  overflow: hidden;
+  background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-bottom) 100%);
+  color: var(--ink);
+}

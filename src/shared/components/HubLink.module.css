@@ -1,0 +1,22 @@
+.link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 16px;
+  border-radius: 999px;
+  background: var(--card);
+  box-shadow: 0 4px 0 rgba(90, 50, 20, 0.2);
+  color: var(--ink);
+  font-size: 1rem;
+  text-decoration: none;
+}
+
+.link:active {
+  translate: 0 3px;
+  box-shadow: 0 1px 0 rgba(90, 50, 20, 0.2);
+}
+
+.link:focus-visible {
+  outline: 4px solid var(--leaf-dark);
+  outline-offset: 4px;
+}
