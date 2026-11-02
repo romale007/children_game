@@ -62,6 +62,21 @@ export function bloop(volume = 0.15) {
   osc.stop(now + 0.3)
 }
 
+/** A soft bell for one found item when the task needs several. */
+export function ding(volume = 0.1) {
+  const ctx = audio()
+  const now = ctx.currentTime
+  const osc = ctx.createOscillator()
+  osc.frequency.value = 880
+  const gain = ctx.createGain()
+  gain.gain.setValueAtTime(0, now)
+  gain.gain.linearRampToValueAtTime(volume, now + 0.01)
+  gain.gain.exponentialRampToValueAtTime(0.001, now + 0.5)
+  osc.connect(gain).connect(ctx.destination)
+  osc.start(now)
+  osc.stop(now + 0.5)
+}
+
 /** A short rising tune for the end of a game. */
 export function fanfare(volume = 0.08) {
   const ctx = audio()

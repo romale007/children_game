@@ -68,6 +68,21 @@
 }
 
 /* Above the flying balloons. */
-.restart {
+.buttons {
   position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 16px 24px;
+}
+
+.again {
+  min-height: 64px;
+  padding: 0 1.2em;
+  border-radius: 999px;
+  background: var(--card);
+  font-size: clamp(1.2rem, 3vw, 1.6rem);
+  font-weight: 900;
+  box-shadow: var(--shadow);
 }

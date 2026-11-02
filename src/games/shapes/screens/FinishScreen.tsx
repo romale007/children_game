@@ -7,7 +7,7 @@ import { celebrate } from '../../../shared/confetti'
 import Balloon from '../components/Balloon'
 import { balloonColors } from '../components/balloonColors'
 import Bear from '../components/Bear'
-import { finishNote } from '../levels'
+import { finishNote, type Part } from '../levels'
 import { say } from '../voice'
 import styles from './FinishScreen.module.css'
 
@@ -23,12 +23,20 @@ function summary(log: number[]) {
     .join(' ')
 }
 
-export default function FinishScreen({ log, onRestart }: { log: number[]; onRestart: () => void }) {
+type Props = {
+  part: Part
+  log: number[]
+  onRestart: () => void
+  /** Missing after the last part. */
+  onNextPart?: () => void
+}
+
+export default function FinishScreen({ part, log, onRestart, onNextPart }: Props) {
   useEffect(() => {
     celebrate()
     fanfare()
-    say('finish-1')
-  }, [])
+    say(part.finishPhrase)
+  }, [part])
 
   return (
     <div className={`screen ${styles.finish}`}>
@@ -63,13 +71,20 @@ export default function FinishScreen({ log, onRestart }: { log: number[]; onRest
       >
         Ура!
       </motion.h1>
-      <p className={styles.subtitle}>Все фигуры найдены!</p>
+      <p className={styles.subtitle}>{part.finishTitle}</p>
 
       <Bear pose="dance" className={styles.bear} />
 
-      <button className={`big-button ${styles.restart}`} onClick={onRestart}>
-        Играть ещё раз ↻
-      </button>
+      <div className={styles.buttons}>
+        <button className={onNextPart ? styles.again : 'big-button'} onClick={onRestart}>
+          Играть ещё раз ↻
+        </button>
+        {onNextPart && (
+          <button className="big-button" onClick={onNextPart}>
+            Дальше ▶
+          </button>
+        )}
+      </div>
 
       <p className={styles.summary}>{summary(log)}</p>
     </div>

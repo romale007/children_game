@@ -1,6 +1,6 @@
 .start {
   justify-content: center;
-  gap: clamp(8px, 2vh, 24px);
+  gap: clamp(12px, 3vh, 32px);
   text-align: center;
 }
 
@@ -26,14 +26,9 @@
   text-shadow: 0 5px 0 rgba(194, 101, 12, 0.25);
 }
 
-.subtitle {
-  margin: 0;
-  font-size: clamp(1.1rem, 3vw, 1.8rem);
-}
-
 .scene {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
   gap: clamp(16px, 4vw, 48px);
   width: 100%;
@@ -43,21 +38,53 @@
 .bear {
   width: clamp(100px, 18vw, 210px);
   height: auto;
+  flex-shrink: 0;
+}
+
+.parts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(16px, 3vw, 32px);
+}
+
+.part {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: clamp(14px, 2.5vw, 24px);
+  border-radius: var(--radius);
+  background: var(--card);
+  box-shadow: 0 8px 0 rgba(44, 62, 102, 0.15);
+  transition: translate 0.1s, box-shadow 0.1s;
+}
+
+.part:active {
+  translate: 0 6px;
+  box-shadow: 0 2px 0 rgba(44, 62, 102, 0.15);
 }
 
 .figures {
   display: flex;
-  gap: clamp(8px, 2vw, 20px);
-  padding-bottom: 12px;
+  gap: clamp(6px, 1.5vw, 12px);
 }
 
 .figure {
-  width: clamp(56px, 11vw, 120px);
-  height: clamp(56px, 11vw, 120px);
-  padding: 10px;
-  border-radius: 20px;
-  background: var(--card);
-  box-shadow: var(--shadow);
+  display: block;
+  width: clamp(48px, 8vw, 84px);
+  height: clamp(48px, 8vw, 84px);
+}
+
+.partTitle {
+  min-width: 100%;
+  padding: 10px 24px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  font-size: clamp(1.3rem, 3vw, 1.9rem);
+  font-weight: 900;
+  box-shadow: 0 5px 0 var(--accent-dark);
 }
 
 .howto {
@@ -66,4 +93,10 @@
   color: var(--ink-soft);
   font-size: clamp(0.95rem, 2vw, 1.15rem);
   font-weight: 600;
+}
+
+@media (max-width: 600px) {
+  .scene {
+    flex-direction: column;
+  }
 }

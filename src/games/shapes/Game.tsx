@@ -2,7 +2,7 @@ import { AnimatePresence, motion } from 'motion/react'
 import { useCallback, useEffect, useReducer } from 'react'
 import { stopAudio } from '../../shared/audio/voice'
 import styles from './Game.module.css'
-import { levels } from './levels'
+import { parts } from './levels'
 import { initialState, reducer } from './reducer'
 import FinishScreen from './screens/FinishScreen'
 import StartScreen from './screens/StartScreen'
@@ -12,9 +12,11 @@ export default function Game() {
   const [state, dispatch] = useReducer(reducer, initialState)
   // Don't keep talking after the player leaves the game.
   useEffect(() => stopAudio, [])
+  const levels = state.screen === 'start' ? [] : parts[state.part].levels
   // Stable so TaskScreen's auto-advance isn't restarted by re-renders.
-  const next = useCallback(() => dispatch({ type: 'NEXT', total: levels.length }), [])
-  const key = state.screen === 'task' ? `task-${state.index}` : state.screen
+  const next = useCallback(() => dispatch({ type: 'NEXT', total: levels.length }), [levels.length])
+  const start = (part: number) => dispatch({ type: 'START', part })
+  const key = state.screen === 'start' ? 'start' : `${state.screen}-${state.part}-${state.screen === 'task' ? state.index : ''}`
 
   return (
     <div className={styles.theme}>
@@ -26,7 +28,7 @@ export default function Game() {
           exit={{ opacity: 0, x: -60 }}
           transition={{ duration: 0.3 }}
         >
-          {state.screen === 'start' && <StartScreen onPlay={() => dispatch({ type: 'START' })} />}
+          {state.screen === 'start' && <StartScreen onPlay={start} />}
           {state.screen === 'task' && (
             <TaskScreen
               level={levels[state.index]}
@@ -35,13 +37,19 @@ export default function Game() {
               solved={state.solved}
               mistakes={state.mistakes}
               lastWrong={state.lastWrong}
-              onAnswer={(figure) => dispatch({ type: 'ANSWER', figure, correct: levels[state.index].answer })}
+              found={state.found}
+              onAnswer={(option, targets) => dispatch({ type: 'ANSWER', option, targets })}
               onNext={next}
               onHome={() => dispatch({ type: 'HOME' })}
             />
           )}
           {state.screen === 'finish' && (
-            <FinishScreen log={state.log} onRestart={() => dispatch({ type: 'START' })} />
+            <FinishScreen
+              part={parts[state.part]}
+              log={state.log}
+              onRestart={() => start(state.part)}
+              onNextPart={state.part + 1 < parts.length ? () => start(state.part + 1) : undefined}
+            />
           )}
         </motion.div>
       </AnimatePresence>

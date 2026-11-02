@@ -4,13 +4,11 @@ import HubLink from '../../../shared/components/HubLink'
 import ParentHint from '../../../shared/components/ParentHint'
 import Bear from '../components/Bear'
 import FigureImage from '../components/FigureImage'
-import { startNote, type Figure } from '../levels'
+import { parts, startNote } from '../levels'
 import { preloadVoice, say } from '../voice'
 import styles from './StartScreen.module.css'
 
-const figures: Figure[] = ['circle', 'square', 'triangle']
-
-export default function StartScreen({ onPlay }: { onPlay: () => void }) {
+export default function StartScreen({ onPlay }: { onPlay: (part: number) => void }) {
   useEffect(() => {
     preloadVoice()
     say('hello')
@@ -33,35 +31,40 @@ export default function StartScreen({ onPlay }: { onPlay: () => void }) {
       >
         Фигуры
       </motion.h1>
-      <p className={styles.subtitle}>Круг, квадрат, треугольник</p>
 
       <div className={styles.scene}>
         <Bear pose="wave" className={styles.bear} />
-        <div className={styles.figures}>
-          {figures.map((figure, i) => (
-            <motion.div
-              key={figure}
-              className={styles.figure}
-              animate={{ y: [0, -12, 0] }}
-              transition={{ duration: 1.6, delay: i * 0.3, repeat: Infinity }}
+        <div className={styles.parts}>
+          {parts.map((part, i) => (
+            <motion.button
+              key={part.title}
+              className={styles.part}
+              onClick={() => onPlay(i)}
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ type: 'spring', stiffness: 200, damping: 14, delay: 0.2 + i * 0.15 }}
             >
-              <FigureImage figure={figure} />
-            </motion.div>
+              <span className={styles.figures}>
+                {part.figures.map((figure, j) => (
+                  <motion.span
+                    key={figure}
+                    className={styles.figure}
+                    animate={{ y: [0, -8, 0] }}
+                    transition={{ duration: 1.6, delay: j * 0.3, repeat: Infinity }}
+                  >
+                    <FigureImage figure={figure} />
+                  </motion.span>
+                ))}
+              </span>
+              <span className={styles.partTitle}>{part.title} ▶</span>
+            </motion.button>
           ))}
         </div>
       </div>
 
-      <motion.button
-        className="big-button"
-        onClick={onPlay}
-        animate={{ scale: [1, 1.06, 1] }}
-        transition={{ duration: 1.4, repeat: Infinity }}
-      >
-        Играть ▶
-      </motion.button>
-
       <p className={styles.howto}>
         Как играть: мишка называет фигуру, ребёнок нажимает на неё. За каждое задание мишка дарит воздушный шарик.
+        Вторая часть сложнее первой.
       </p>
     </div>
   )

@@ -4,7 +4,7 @@ import { img } from './assets'
 export default {
   id: 'shapes',
   title: 'Фигуры',
-  description: 'Учимся узнавать круг, квадрат и треугольник',
+  description: 'Круг, квадрат, треугольник, прямоугольник и овал',
   age: '5 лет',
   cover: img('cover.svg'),
   color: '#d9e7fb',

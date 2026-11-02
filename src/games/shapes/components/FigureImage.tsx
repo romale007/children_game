@@ -11,6 +11,8 @@ const drawings: Record<Figure, ReactNode> = {
   triangle: (
     <polygon points="50,8 93,88 7,88" fill={fill} stroke={stroke} strokeWidth="4" strokeLinejoin="round" />
   ),
+  rectangle: <rect x="5" y="25" width="90" height="50" rx="3" fill={fill} stroke={stroke} strokeWidth="4" />,
+  oval: <ellipse cx="50" cy="50" rx="45" ry="28" fill={fill} stroke={stroke} strokeWidth="4" />,
   ball: (
     <>
       <circle cx="50" cy="50" r="41" fill="#ef5b4c" stroke="#c23d30" strokeWidth="4" />
@@ -31,10 +33,12 @@ const drawings: Record<Figure, ReactNode> = {
   ),
 }
 
-export default function FigureImage({ figure }: { figure: Figure }) {
+type Props = { figure: Figure; size?: number; rotate?: number }
+
+export default function FigureImage({ figure, size = 1, rotate = 0 }: Props) {
   return (
     <svg viewBox="0 0 100 100" width="100%" height="100%" aria-hidden="true">
-      {drawings[figure]}
+      <g transform={`translate(50 50) rotate(${rotate}) scale(${size}) translate(-50 -50)`}>{drawings[figure]}</g>
     </svg>
   )
 }
